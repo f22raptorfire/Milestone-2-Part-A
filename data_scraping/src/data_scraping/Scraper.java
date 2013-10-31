@@ -12,24 +12,7 @@ import java.util.Date;
 
 
 public class Scraper {
-	
-	private ArrayList<String> images;
-    private ArrayList<String> courseNames;
-    private ArrayList<String> startDates;
-    private ArrayList<String> courseLengths;
-    private ArrayList<String> professors;
-    private ArrayList<ArrayList<String>> instructorImages;
-	
-    public Scraper()
-    {
-    	images = new ArrayList<String>();
-    	courseNames = new ArrayList<String>();
-        startDates = new ArrayList<String>();
-        courseLengths = new ArrayList<String>();
-        professors = new ArrayList<String>();
-        instructorImages = new ArrayList<ArrayList<String>>();
-    }
-    
+	    
     public void scrapeCanvas() throws Exception 
     {
     	  String url = "http://canvas.net";
@@ -49,11 +32,12 @@ public class Scraper {
           	//get image and store        	
            	Element image = coursePage.select("div[class=featured-course-image] span").get(0);	
           	String attr = image.attr("style");
-           	images.add(url + attr.substring( attr.indexOf("/"), attr.indexOf(")")));
+          	
+           	Database.pushImage(url + attr.substring( attr.indexOf("/"), attr.indexOf(")")));
           
           	//get course name and store
           	Elements courseName = coursePage.select("h2[class=emboss-light]");
-          	courseNames.add(courseName.text()); 
+          	Database.pushCourseName(courseName.text()); 
           	      	
           	//start date and store
           	Element startDate = coursePage.select("div[class=course-detail-info] > p > strong").get(0);
@@ -68,7 +52,7 @@ public class Scraper {
               	s = s.replaceAll(startDateRegex, r);
               	endDefined = false;	
           	}
-          	startDates.add(s);
+          	Database.pushStartDate(s);
           	
           	//get course length
           	if(endDefined)
@@ -95,11 +79,11 @@ public class Scraper {
           	} else {
           		s = "indefinite";
           	}
-          	courseLengths.add(s);
+          	Database.pushCourseLength(s);
           	
           	//get professor name and store
             	Elements professor = coursePage.select("div[class=instructor-bio] h3");	
-            	professors.add(professor.text()); 
+            	Database.pushProfessor(professor.text()); 
           	
           	//get instructor image links and store
           	Elements instructorImage = coursePage.select("div[class=instructor-bio] img");	
@@ -108,7 +92,7 @@ public class Scraper {
           	{
           		temp.add(e.attr("abs:src"));
           	}
-          	instructorImages.add(temp);
+          	Database.pushInstructorImages(temp);
           }  
     }
     
@@ -137,8 +121,11 @@ public class Scraper {
    
     public static void main(String[] args) throws Exception 
     {
+    	Database d = new Database();
     	Scraper s = new Scraper();
     	s.scrapeCanvas();
     	s.insertTables();
+    	
+    	System.out.println(Database.toSql());
     }
 }
