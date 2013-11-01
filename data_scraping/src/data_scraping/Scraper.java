@@ -54,8 +54,6 @@ public class Scraper {
 					"div[class=featured-course-image] span").get(0);
 			String attr = image.attr("style");
 
-			// Database.pushImage(url + attr.substring( attr.indexOf("/"),
-			// attr.indexOf(")")));
 			images.add(url
 					+ attr.substring(attr.indexOf("/"), attr.indexOf(")")));
 
@@ -109,7 +107,6 @@ public class Scraper {
 			// get instructor image links and store
 			Elements instructorImage = coursePage
 					.select("div[class=instructor-bio] img");
-			//System.out.println("=" + instructorImage + "=");
 			instructorImages.add(instructorImage.attr("abs:src"));
 			
 		}
@@ -134,12 +131,9 @@ public class Scraper {
 	                   "`Instructor Images` TEXT, " +
 	    			   "`Site` TEXT)"; 
 
-	      stmt.executeUpdate(s);
-		
-		 // PreparedStatements can use variables and are more efficient
+	    stmt.executeUpdate(s);
+
 		PreparedStatement preparedStatement = conn.prepareStatement("insert into canvas values (?, ?, ?, ?, ?, ?, ?, ?)");
-	      // "myuser, webpage, datum, summary, COMMENTS from FEEDBACK.COMMENTS");
-	      // Parameters start with 1
 		
 		for(int i = 0; i < courseNames.size();i++)
 		{

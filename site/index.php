@@ -13,7 +13,6 @@ $query = "SELECT * FROM canvas"; //You don't need a ; like you do in SQL
 $result = mysql_query($query);
 $col_name = array();
 // start a table tag in the HTML
-//prison of mirrors
 echo <<< END
    <table>
      <tr>
