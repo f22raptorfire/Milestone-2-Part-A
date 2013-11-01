@@ -32,13 +32,15 @@ while($row = mysql_fetch_array($result)){   //Creates a loop to loop through res
 	for ($i=0; $i < mysql_num_fields($result); $i++) {
 		$temp = $row[$col_name[$i]];
 		if(!empty($temp)) {
-			if(preg_match('/^http/', $temp)) {
+			if(preg_match('/(download\?|(jpg|png|gif|bmp)$)/i', $temp)) {
 				$temp = "<img width =\"130px\" heigth=\"95px\" src=\"{$temp}\">";
+			} else if(preg_match('/^http/', $temp)) {
+				$temp = "<a href=\"{$temp}\">Link</a>";
 			} else {
 				$temp = "<p>{$temp}</p>";
 			}
 		} else {
-			$temp = '<img src="http://i51.tinypic.com/91lc2f.gif" border="0" alt="Image and video hosting by TinyPic">';
+			$temp = '<img width ="130px" heigth="95px" src="https://scontent-a-sjc.xx.fbcdn.net/hphotos-prn1/250250_257757674235389_5197433_n.jpg">';
 		}
 		echo "        <td>" . $temp . "</td>\n";
 	}
