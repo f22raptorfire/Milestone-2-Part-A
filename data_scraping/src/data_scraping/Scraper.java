@@ -66,12 +66,10 @@ public class Scraper {
 					"div[class=course-detail-info] > p > strong").get(0);
 			String s = startDate.text();
 
-			String r;
 			boolean endDefined = true;
-			if (s.matches("Self-paced, available.*")) {
-				String startDateRegex = "(Self-paced, available )?(.*)";
-				r = "$2";
-				s = s.replaceAll(startDateRegex, r);
+			String selfPacedPattern = "Self-paced, available (.*)";
+			if (s.matches(selfPacedPattern)) {
+				s = s.replaceAll(selfPacedPattern, "$1");
 				endDefined = false;
 			}
 			startDates.add(s);
@@ -82,10 +80,6 @@ public class Scraper {
 				Element endDate = coursePage.select(
 						"div[class=course-detail-info] > p > strong").get(1);
 				String ed = endDate.text();
-				String endDateRegex = "(.*)";
-				r = "$1";
-
-				s = s.replaceAll(endDateRegex, r);
 
 				// convert from string to date type
 				SimpleDateFormat dt = new SimpleDateFormat("MMM dd, yyyy");
