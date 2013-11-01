@@ -17,6 +17,7 @@ public class Scraper {
 	private ArrayList<String> courseNames;
 	private ArrayList<String> startDates;
 	private ArrayList<String> courseLengths;
+	private ArrayList<String> coursePages;
 	private ArrayList<String> professors;
 	private ArrayList<String> instructorImages;
 
@@ -25,7 +26,7 @@ public class Scraper {
 		courseNames = new ArrayList<String>();
 		startDates = new ArrayList<String>();
 		courseLengths = new ArrayList<String>();
-		;
+		coursePages = new ArrayList<String>();
 		professors = new ArrayList<String>();
 		instructorImages = new ArrayList<String>();
 
@@ -46,6 +47,7 @@ public class Scraper {
 		for (Element link : courseLinks) {
 			// get page contents
 			coursePage = Jsoup.connect(link.attr("href")).get();
+			coursePages.add(link.attr("abs:href"));
 
 			// get image and store
 			Element image = coursePage.select(
@@ -123,7 +125,8 @@ public class Scraper {
 		Statement stmt = conn.createStatement();
 
 	    String s = "CREATE TABLE IF NOT EXISTS canvas " +
-	                   "(`Images` TEXT, " +
+	                   "(`Course Pages` TEXT, " + 
+	                   "`Images` TEXT, " +
 	                   "`Course Names` TEXT, " + 
 	                   "`Start Dates` TEXT, " + 
 	                   "`Course Lengths` TEXT, " + 
@@ -134,19 +137,20 @@ public class Scraper {
 	      stmt.executeUpdate(s);
 		
 		 // PreparedStatements can use variables and are more efficient
-		PreparedStatement preparedStatement = conn.prepareStatement("insert into canvas values (?, ?, ?, ?, ?, ?, ?)");
+		PreparedStatement preparedStatement = conn.prepareStatement("insert into canvas values (?, ?, ?, ?, ?, ?, ?, ?)");
 	      // "myuser, webpage, datum, summary, COMMENTS from FEEDBACK.COMMENTS");
 	      // Parameters start with 1
 		
 		for(int i = 0; i < courseNames.size();i++)
 		{
-	      preparedStatement.setString(1, images.get(i));
-	      preparedStatement.setString(2, courseNames.get(i));
-	      preparedStatement.setString(3, startDates.get(i));
-	      preparedStatement.setString(4, courseLengths.get(i));
-	      preparedStatement.setString(5, professors.get(i));
-	      preparedStatement.setString(6, instructorImages.get(i)); 
-	      preparedStatement.setString(7, "Canvas");
+		  preparedStatement.setString(1, coursePages.get(i));
+	      preparedStatement.setString(2, images.get(i));
+	      preparedStatement.setString(3, courseNames.get(i));
+	      preparedStatement.setString(4, startDates.get(i));
+	      preparedStatement.setString(5, courseLengths.get(i));
+	      preparedStatement.setString(6, professors.get(i));
+	      preparedStatement.setString(7, instructorImages.get(i)); 
+	      preparedStatement.setString(8, "Canvas");
 	      preparedStatement.executeUpdate();
 		}
 
