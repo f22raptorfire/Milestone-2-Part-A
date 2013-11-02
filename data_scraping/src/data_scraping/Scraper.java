@@ -152,32 +152,76 @@ public class Scraper {
         Connection conn = DriverManager.getConnection(url, "root", "");
 
         Statement stmt = conn.createStatement();
+        
+        String create_course_details = "CREATE TABLE IF NOT EXISTS `coursedetails` (" +
+			"`id` int(4) NOT NULL," +
+			"`profname` varchar(30) NOT NULL," +
+			"`profimage` text NOT NULL" +
+			") ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+        
+		String create_course_data = "CREATE TABLE IF NOT EXISTS `course_data` (" +
+			"`id` int(5) NOT NULL AUTO_INCREMENT," +
+			"`title` text NOT NULL," + 
+			"`short_desc` text NOT NULL," +
+			"`long_desc` text NOT NULL," +
+			"`course_link` text NOT NULL," +
+			"`video_link` text NOT NULL," +
+			"`start_date` date NOT NULL," +
+			"`course_length` int(11) NOT NULL," +
+			"`course_image` text NOT NULL," +
+			"`category` varchar(100) NOT NULL," +
+			"`site` text NOT NULL," +
+			"PRIMARY KEY (`id`)," +
+			"UNIQUE KEY `id` (`id`)" + 
+			") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2573 ;";
 
-        String s = "CREATE TABLE IF NOT EXISTS canvas "
-                + "(`Course Pages` TEXT, `Images` TEXT, "
-                + "`Course Names` TEXT, `Start Dates` TEXT, "
-                + "`Course Lengths` TEXT, `Professors` TEXT, "
-                + "`Instructor Images` TEXT, " + "`Site` TEXT)";
 
-        stmt.executeUpdate(s);
+		//Create tables
+        stmt.executeUpdate(create_course_details);
+        stmt.executeUpdate(create_course_data);
 
-        PreparedStatement preparedStatement = conn
-                .prepareStatement("insert into canvas values "
-                        + "(?, ?, ?, ?, ?, ?, ?, ?)");
-
+        PreparedStatement preparedStatementData = conn
+                .prepareStatement("insert into course_data values "
+                        + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        
+        PreparedStatement preparedStatementDetails = conn
+                .prepareStatement("insert into coursedetails values "
+                        + "(?, ?)");
+        
+        //title1, short_desc2, long_desc3, course_link4, video_link5, start_date6, course_length7, course_image8, category9, site10
         for (int i = 0; i < courseNames.size(); i++) {
-            preparedStatement.setString(1, coursePages.get(i));
-            preparedStatement.setString(2, images.get(i));
-            preparedStatement.setString(3, courseNames.get(i));
-            preparedStatement.setString(4, startDates.get(i));
-            preparedStatement.setString(5, courseLengths.get(i));
-            preparedStatement.setString(6, professors.get(i));
-            preparedStatement.setString(7, instructorImages.get(i));
-            preparedStatement.setString(8, "Canvas");
-            preparedStatement.executeUpdate();
+        	//Add course data
+        	preparedStatementData.setString(4, coursePages.get(i));
+        	preparedStatementData.setString(8, images.get(i));
+        	preparedStatementData.setString(1, courseNames.get(i));
+        	preparedStatementData.setString(6, startDates.get(i));
+        	preparedStatementData.setString(7, courseLengths.get(i));
+        	preparedStatementData.setString(10, "Canvas");
+        	
+        	preparedStatementData.executeUpdate();
+        	
+        	//Add professors to details table
+        	preparedStatementData.setString(1, professors.get(i));
+        	preparedStatementData.setString(2, instructorImages.get(i));
+        	
+        	preparedStatementDetails.executeUpdate();
         }
 
         conn.close();
+    }
+    
+    public final void printStatement() {
+    	for (int i = 0; i < courseNames.size(); i++) {
+    		System.out.println("I:"+i);
+    		System.out.println(coursePages.get(i));
+    		System.out.println(images.get(i));
+    		System.out.println(courseNames.get(i));
+    		System.out.println(startDates.get(i));
+    		System.out.println(courseLengths.get(i));
+    		System.out.println(professors.get(i));
+    		System.out.println(instructorImages.get(i));
+    		
+    	}
     }
 
     /**
@@ -189,6 +233,7 @@ public class Scraper {
     public static void main(final String[] args) throws Exception {
         Scraper s = new Scraper();
         s.scrapeCanvas();
-        s.insertTables();
+        s.printStatement();
+        //s.insertTables();
     }
 }
