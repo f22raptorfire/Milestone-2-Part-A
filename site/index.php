@@ -1,3 +1,4 @@
+<!-- Group 4, CS174-01, 2013 Fall -->
 <!DOCTYPE html>
 <html>
 <head>
