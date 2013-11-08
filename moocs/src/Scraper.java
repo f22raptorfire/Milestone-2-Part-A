@@ -45,19 +45,19 @@ public class Scraper {
 		
 		// db connection start
 		Class.forName("com.mysql.jdbc.Driver");
-		String dbUrl = "jdbc:mysql://localhost:3306/moocs";
+		String dbUrl = "jdbc:mysql://localhost:3306/test2";
 		Connection conn = DriverManager.getConnection(dbUrl, "root", "");
 
 		PreparedStatement preparedStatementData = conn
 				.prepareStatement("insert into course_data"
-						+ "(id, title, short_desc, long_desc, course_link,"
+						+ "(title, short_desc, long_desc, course_link,"
 						+ "video_link, start_date, course_length, course_image,"
 						+ "category, site) values "
-						+ "(0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+						+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 		PreparedStatement preparedStatementDetails = conn
-				.prepareStatement("insert into coursedetails(id, profname, profimage) values "
-						+ "(0, ?, ?)");
+				.prepareStatement("insert into coursedetails(profname, profimage) values "
+						+ "(?, ?)");
 
 		String canvasUrl = "http://canvas.net";
 		Document homePage = Jsoup.connect(canvasUrl).get();
