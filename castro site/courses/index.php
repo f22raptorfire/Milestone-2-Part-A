@@ -12,7 +12,7 @@
         table
         {
             border-radius: 10px;
-            
+
         }
         th
         {
@@ -27,6 +27,23 @@
     </style>
 
     <body>
+
+    <p>
+    <?
+        //Total number of courses to be displayed per page
+        $courses_per_page = 10;
+
+        //Get the total number of items in the database
+        $row_query = "SELECT * FROM course_data";
+        $row_result = mysql_query($row_query);
+        $num_elements = mysql_num_rows($row_result);
+
+        $page_number = 1;
+        if(isset($_GET['page']))
+            $page_number = $_GET['page'];
+    ?>
+    </p>
+
         <table border="1" cellspacing ='0' bordercolor="#000000" width = "1400" align = "center">
             <tr>
                 <th>Course Name</th>
@@ -36,24 +53,20 @@
                 <th width = '150'>Start Date</th>
                 <th width = '75'>Course Length (weeks)</th>
             </tr>
-            <!--First row-->
-
             <?
-               /* $test = "SELECT * FROM coursedetails WHERE id = '45'";
-                $test_result = mysql_query($test);
-                echo mysql_num_rows($test_result);
+                $offset = 144;//Indexing in my local DB was messed up. This offset is the id of the first course in the DB.
+                
+                 $start_elem = $offset + ($page_number - 1) * $courses_per_page;
+                 $end_elem = $start_elem + $courses_per_page - 1;
 
-                echo $profname;*/
-            ?>
-
-            <?
                 //selection query
-                $query = "SELECT * FROM course_data";
+                $query = "SELECT * FROM course_data WHERE id BETWEEN $start_elem AND $end_elem";
                 $result = mysql_query($query);
+
 
                 while($row = mysql_fetch_assoc($result))
                 {
-                    $id = $row['id'];
+                    $course_id = $row['id'];
                     $title = $row['title'];
                     $short_desc = $row['short_desc'];
                     $long_desc = $row['long_desc'];
@@ -65,9 +78,7 @@
                     $category = $row['category'];
                     $site = $row['site'];
 
-                    $offset = 0; //Offset for id should it be needed
-
-                    $detail_id = $id - $offset;
+                    $detail_id = $course_id - 100;
                     $query_detail = "SELECT * FROM coursedetails WHERE id = '$detail_id'";
                     $result_detail = mysql_query($query_detail);
                     list($id, $profname, $profimage, $cid) = mysql_fetch_array($result_detail);
@@ -76,7 +87,7 @@
                     <tr height = '100'>
                         <td width = '200' align='center'>
                             <a href = '$course_link'>
-                                $title
+                                $course_id: $title
                             </a>
                         </td>
                         
@@ -112,5 +123,39 @@
                 }
             ?>
         </table>
+
+        <!-- Page selections -->
+        <p align = 'center'>
+            <?
+                if($page_number == 1)
+                    echo "<<";
+                else
+                {
+                    $prev_page = $page_number-1;
+                    echo "<a href = /courses/index.php?page=$prev_page> << </a>"; 
+                }
+
+                $page_count = $num_elements / $courses_per_page;
+
+                if($page_count % $courses_per_page != 0)
+                    $page_count++;
+
+                $page_count = intval($page_count);
+
+                for($i=1;$i<=$page_count;$i++)
+                    if($page_number == $i)
+                        Echo " <a href = /courses/index.php?page=$i>  [$i]  <a>";
+                    else
+                        Echo " <a href = /courses/index.php?page=$i>  $i  <a>";
+                
+                if($page_number == $page_count)
+                    echo ">>";
+                else
+                {
+                    $next_page = $page_number + 1;
+                    echo "<a href = /courses/index.php?page=$next_page> >> </a>"; 
+                }
+            ?>
+        </p>
     </body>
 </html>
