@@ -10,6 +10,9 @@
 	<script type="text/javascript" src="include/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
 	<script type="text/css" src="include/DataTables-1.9.4/media/css/jquery.dataTables.css"></script>
 	<script class="jsbin" src="http://datatables.net/download/build/jquery.dataTables.nightly.js"></script>
+	<style type="text/css">
+		@import "include/DataTables-1.9.4/media/css/demo_table.css";
+    </style>
 	<script type="text/javascript">
 		$(document).ready(function()
 		{
@@ -32,7 +35,7 @@
 		$col_name = array( );
 		// start a table tag in the HTML
 	?>
-	<table id="results">
+	<table id="results" class="display">
 		<thead>
 			<tr>
 				<?php
@@ -98,9 +101,10 @@
 						}	
 						else
 						{
+							//no video to post, inserts empty picture
 							$temp = '<img width="95px" height="95px" src="http://www.travelervip.com/skin/frontend/default/travelervip/images/facebook-default-no-profile-pic.jpg">';
 						}
-						echo "        <td>" . $temp . "</td>\n";
+						echo "        <td class=\"center\">" . $temp . "</td>\n";
 					}
 					echo "       </tr>\n";
 				}
