@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>Home</title>
-	<link rel="stylesheet" type="text/css" href="casablanca.css">
+	<!--<link rel="stylesheet" type="text/css" href="casablanca.css">-->
 	
 	<!-- Kurt Anderson -->
 	<script type="text/javascript" src="include/jquery-2.0.3.js"></script>
@@ -26,8 +26,8 @@
 		{
 			die('Could not connect: ' . mysql_error());
 		}
-		mysql_select_db( 'courses' );
-		$query = "SELECT * FROM canvas"; //You don't need a ; like you do in SQL
+		mysql_select_db( 'moocs' );
+		$query = "SELECT * FROM course_data"; //You don't need a ; like you do in SQL
 		$result = mysql_query( $query );
 		$col_name = array( );
 		// start a table tag in the HTML
