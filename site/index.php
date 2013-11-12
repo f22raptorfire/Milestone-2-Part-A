@@ -78,7 +78,7 @@
 					?>
 		                    <tr height = '100'>
 		                        <td width = '200' align='center'>
-		                            <a href = '$course_link'>
+		                            <a href = '<? echo $course_link ?>'>
 		                                <? echo $title ?>
 		                            </a>
 		                            
