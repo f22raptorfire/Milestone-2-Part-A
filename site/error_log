@@ -1,0 +1,80 @@
+[08-Nov-2013 02:02:46] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: NO) in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 2
+[08-Nov-2013 02:04:44] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: NO) in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 2
+[08-Nov-2013 02:04:47] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: NO) in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 2
+[08-Nov-2013 02:05:06] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: NO) in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 2
+[08-Nov-2013 02:05:07] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: NO) in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 2
+[08-Nov-2013 02:05:07] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: NO) in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 2
+[08-Nov-2013 02:05:07] PHP Warning:  mysql_connect() [<a href='function.mysql-connect'>function.mysql-connect</a>]: Access denied for user 'root'@'localhost' (using password: NO) in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 2
+[08-Nov-2013 02:06:25] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[08-Nov-2013 02:06:25] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[08-Nov-2013 02:08:22] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[08-Nov-2013 02:08:22] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[08-Nov-2013 02:11:26] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[08-Nov-2013 02:11:26] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[10-Nov-2013 22:42:50] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[10-Nov-2013 22:42:50] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 14:26:46] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 14:26:46] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 14:26:55] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 14:26:55] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 14:26:58] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 14:26:58] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 14:26:58] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 14:26:58] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 14:27:06] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 14:27:06] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 14:27:07] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 14:27:07] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 15:02:41] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 15:02:41] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 16:21:49] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 16:21:49] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 16:30:39] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 16:30:39] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 16:30:39] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 16:30:39] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 16:30:39] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 16:30:39] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 16:53:13] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 16:53:13] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 18:18:47] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 18:18:47] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 18:20:09] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 18:20:09] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 19:19:22] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening 'dbconnect.php' for inclusion (include_path='.:/usr/lib64/php:/usr/share/pear') in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 1
+[11-Nov-2013 19:19:22] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'sjsucsor'@'localhost' (using password: NO) in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 37
+[11-Nov-2013 19:19:22] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 37
+[11-Nov-2013 19:19:22] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 38
+[11-Nov-2013 19:19:22] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'sjsucsor'@'localhost' (using password: NO) in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 68
+[11-Nov-2013 19:19:22] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 68
+[11-Nov-2013 19:19:22] PHP Warning:  mysql_fetch_assoc(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 71
+[11-Nov-2013 19:41:33] PHP Parse error:  syntax error, unexpected T_IF, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 99
+[11-Nov-2013 19:41:47] PHP Parse error:  syntax error, unexpected T_IF, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 99
+[11-Nov-2013 19:41:58] PHP Parse error:  syntax error, unexpected T_IF, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 99
+[11-Nov-2013 19:42:57] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 111
+[11-Nov-2013 19:43:00] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 111
+[11-Nov-2013 19:43:46] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 111
+[11-Nov-2013 19:44:11] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 111
+[11-Nov-2013 19:45:21] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 111
+[11-Nov-2013 19:46:29] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 111
+[11-Nov-2013 19:46:38] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 111
+[11-Nov-2013 19:47:48] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 111
+[11-Nov-2013 19:48:57] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 111
+[11-Nov-2013 19:49:09] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 19:49:09] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 19:49:15] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 111
+[11-Nov-2013 19:50:52] PHP Parse error:  syntax error, unexpected T_ECHO, expecting ',' or ';' in /home2/sjsucsor/public_html/cs160/2013fall/group4/index2.php on line 111
+[11-Nov-2013 20:04:01] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 20:04:01] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 20:15:36] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 20:15:36] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 20:15:37] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 20:15:37] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 20:18:02] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 20:18:02] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 20:23:27] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 11
+[11-Nov-2013 20:23:27] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 38
+[11-Nov-2013 20:28:02] PHP Warning:  mysql_num_fields(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/coursedetails.php on line 11
+[11-Nov-2013 20:28:02] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home2/sjsucsor/public_html/cs160/2013fall/group4/coursedetails.php on line 38
+[11-Nov-2013 22:41:41] PHP Parse error:  syntax error, unexpected $end in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 70
+[11-Nov-2013 22:56:58] PHP Parse error:  syntax error, unexpected $end in /home2/sjsucsor/public_html/cs160/2013fall/group4/index.php on line 115

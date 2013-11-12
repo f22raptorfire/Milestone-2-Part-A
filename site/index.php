@@ -1,517 +1,148 @@
-<!-- Group 4, CS174-01, 2013 Fall -->
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Home</title>
-	<link rel="stylesheet" type="text/css" href="casablanca.css">
+<?php include("dbconnect.php");
+ 
+	$courses_per_page = 10; //Total number of courses to be displayed per page
 	
-	<!-- Kurt Anderson -->
-	<script type="text/javascript" src="include/jquery-2.0.3.js"></script>
-	<script type="text/javascript" src="include/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
-	<script type="text/css" src="include/DataTables-1.9.4/media/css/jquery.dataTables.css"></script>
-	<script class="jsbin" src="http://datatables.net/download/build/jquery.dataTables.nightly.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function()
-		{
-			$('#test').dataTable();
-		});
-	</script>
-	<!-- Kurt Anderson -->
-</head>
-<body>
-	<?php
-		// no password on local mysql database (location, username, password)
-		$connection = mysql_connect( 'localhost', 'root', '' );
-		if (!$connection)
-		{
-			die('Could not connect: ' . mysql_error());
-		}
-		mysql_select_db( 'courses' );
-		$query = "SELECT * FROM canvas"; //You don't need a ; like you do in SQL
-		$result = mysql_query( $query );
-		$col_name = array( );
-		// start a table tag in the HTML
-	?>
-	<table>
-		<thead>
-			<tr>
-				<?php
-					for ( $i = 0; $i < mysql_num_fields( $result ); $i++ )
-					{
-						$col_name[ $i ] = mysql_field_name( $result, $i );
-						echo "         <th scope=\"col\">" . $col_name[ $i ] . "</th>\n";
-					}
-				?>
-			</tr>
-		</thead>
-		<tfoot>
-			<tr>
-				<?php
-					echo str_repeat( "<td></td>", mysql_num_fields( $result ) );
-				?>
-			</tr> 
-		</tfoot>
-		<tbody>
-			<?php
-				while ( $row = mysql_fetch_array( $result ) )
-				//Creates a loop to loop through results
-				{
-					echo "      <tr>\n";
-					for ( $i = 0; $i < mysql_num_fields( $result ); $i++ )
-					{
-						$temp = $row[ $col_name[ $i ] ];
-						if ( !empty( $temp ) )
-						{
-							if ( preg_match( '/(download\?|(jpg|png|gif|bmp)$)/i', $temp ) )
-							{
-								$temp = "<img height=\"95px\" src=\"{$temp}\">";
-							}
-							else if ( preg_match( '/^http/', $temp ) )
-							{
-								$temp = "<a href=\"{$temp}\">Link</a>";
-							}
-							else
-							{
-								$temp = "<p>{$temp}</p>";
-							}
-						}	
-						else
-						{
-							$temp = '<img width="95px" height="95px" src="http://www.travelervip.com/skin/frontend/default/travelervip/images/facebook-default-no-profile-pic.jpg">';
-						}
-						echo "        <td>" . $temp . "</td>\n";
-					}
-					echo "       </tr>\n";
+	//Get the total number of items in the database
+	$row_query = "SELECT * FROM course_data";
+	$row_result = mysql_query($row_query);
+	$num_elements = mysql_num_rows($row_result);
+	
+	$page_count = $num_elements / $courses_per_page;//Total number of pages
+	$page_count = intval($page_count);
+	if($page_count % $courses_per_page != 0)
+	    $page_count++;  
+	
+	$page_number = 1;
+	if(isset($_GET['page']))
+	    $page_number = $_GET['page'];
+?>
+<html>
+	<head>
+	    <title>
+	        Canvas Courses - Group 4
+	    </title>
+	    <style>
+	    </style>
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    </head>
+
+
+    <body>
+    	
+		<div class="container">
+		    <h1 align = "center">
+		        Canvas Courses
+		    </h1>
+	        <table width="800" class="table table-striped">
+	        	<thead>
+		            <tr>
+		                <th>Name</th>
+		                <th></th>
+		                <th> Description </th>
+		                <th>Professor(s)</th>
+		                <th></th>
+		                <th>Start</th>
+		                <th>Length (Weeks)</th>
+	            	</tr>
+          		</thead>
+          		<tbody>
+		            <?
+		                $offset = 0;//Indexing in my local DB was messed up. This offset is the id of the first course in the DB.
+		                
+		                $start_elem = $offset + ($page_number - 1) * $courses_per_page;
+		                $end_elem = $start_elem + $courses_per_page - 1;
+		
+		                //selection query
+		                $query = "SELECT * FROM course_data WHERE id BETWEEN $start_elem AND $end_elem";
+		                $result = mysql_query($query);
+		
+		
+		                while($row = mysql_fetch_assoc($result))
+		                {
+		                    $course_id = $row['id'];
+		                    $title = $row['title'];
+		                    $short_desc = $row['short_desc'];
+		                    $long_desc = $row['long_desc'];
+		                    $course_link = $row['course_link'];
+		                    $video_link = $row['video_link'];
+		                    $start_date = $row['start_date'];
+		                    $course_length = $row['course_length'];
+		                    $course_image = $row['course_image'];
+		                    $category = $row['category'];
+		                    $site = $row['site'];
+		
+		                    $detail_id = $course_id;
+		                    $query_detail = "SELECT * FROM coursedetails WHERE id = '$detail_id'";
+		                    $result_detail = mysql_query($query_detail);
+		                    list($id, $profname, $profimage, $cid) = mysql_fetch_array($result_detail);
+					?>
+		                    <tr height = '100'>
+		                        <td width = '200' align='center'>
+		                            <a href = '$course_link'>
+		                                <? echo $title ?>
+		                            </a>
+		                            
+					<? if($video_link) { ?>
+		                <a href = '<? echo $video_link ?>'>
+		                    <img src = 'images/play_btn_icon.png' width ='15' height='15'>
+		                </a>
+		            <? }; ?>
+	                    </td>
+	                    
+	                    <td width="100" align='center'>
+	                        <a href='<? echo $course_link ?>'>
+	                            <img src='<? echo $course_image ?>' border='1' width='100' height='100'>
+	                        </a>
+	                    </td>
+	                    
+	                    <td align='center'>
+	                        <? echo $short_desc ?>
+	                    </td>
+	
+	                    <td width="100" align='center'><? echo $profname ?></td>
+	
+	                    <td width="100" align='center'>
+                        	<img src='<? echo $profimage ?>' border='1' width='100' height='100'>
+	                    </td>
+		                        
+                        <td align='center'><? echo $start_date ?></td>
+		
+                    <? if($course_length!=-1) { ?>
+	                    <td width='50' align='center'><? echo $course_length ?></td>
+	                    </tr>
+                    <? } else { ?>
+	                    <td width='50' align='center'>indefinite</td>
+	                    </tr>		                    
+                   	<? } ?>
+		                   
+	        	<? } ?>
+		           
+	            </tbody>
+	        </table>
+	
+	        <!-- Page selections -->
+	        <div class="pagination">
+	        	<ul>
+	            <? if($page_number == 1) { ?>
+	            	<li class="active"><a>Prev</a></li>
+	            <? } else {  $prev_page = $page_number-1; ?>
+		        	<li><a href="index.php?page=<? echo $prev_page ?>">Prev</a></li>
+	            <? }
+				for($i=1;$i<=$page_count;$i++) {
+                	if($page_number == $i)  { ?>
+                        <li class="active"><a href="index.php?page=<? echo $i ?>"><? echo $i ?></a></li>
+                    <? } else { ?>
+                        <li><a href="index.php?page=<? echo $i ?>"><? echo $i ?></a></li>
+					<? } 
 				}
-			?>
-		</tbody>
-	</table>
-	<?php
-		// Close the table in HTML
-		mysql_close(); //Make sure to close out the database connection
-	?>
-	<div id="messingaround">
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="test">
-        <thead>
-          <tr>
-            <th>Rendering engine</th>
-            <th>Browser</th>
-            <th>Platform(s)</th>
-            <th>Engine version</th>
-            <th>CSS grade</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="odd gradeX">
-            <td>Trident</td>
-            <td>Internet Explorer 4.0</td>
-            <td>Win 95+</td>
-            <td class="center"> 4</td>
-            <td class="center">X</td>
-          </tr>
-          <tr class="even gradeC">
-            <td>Trident</td>
-            <td>Internet Explorer 5.0</td>
-            <td>Win 95+</td>
-            <td class="center">5</td>
-            <td class="center">C</td>
-          </tr>
-          <tr class="odd gradeA">
-            <td>Trident</td>
-            <td>Internet Explorer 5.5</td>
-            <td>Win 95+</td>
-            <td class="center">5.5</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="even gradeA">
-            <td>Trident</td>
-            <td>Internet Explorer 6</td>
-            <td>Win 98+</td>
-            <td class="center">6</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="odd gradeA">
-            <td>Trident</td>
-            <td>Internet Explorer 7</td>
-            <td>Win XP SP2+</td>
-            <td class="center">7</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="even gradeA">
-            <td>Trident</td>
-            <td>AOL browser (AOL desktop)</td>
-            <td>Win XP</td>
-            <td class="center">6</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 1.0</td>
-            <td>Win 98+ / OSX.2+</td>
-            <td class="center">1.7</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 1.5</td>
-            <td>Win 98+ / OSX.2+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 2.0</td>
-            <td>Win 98+ / OSX.2+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Firefox 3.0</td>
-            <td>Win 2k+ / OSX.3+</td>
-            <td class="center">1.9</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Camino 1.0</td>
-            <td>OSX.2+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Camino 1.5</td>
-            <td>OSX.3+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Netscape 7.2</td>
-            <td>Win 95+ / Mac OS 8.6-9.2</td>
-            <td class="center">1.7</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Netscape Browser 8</td>
-            <td>Win 98SE+</td>
-            <td class="center">1.7</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Netscape Navigator 9</td>
-            <td>Win 98+ / OSX.2+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Mozilla 1.0</td>
-            <td>Win 95+ / OSX.1+</td>
-            <td class="center">1</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Mozilla 1.1</td>
-            <td>Win 95+ / OSX.1+</td>
-            <td class="center">1.1</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Mozilla 1.2</td>
-            <td>Win 95+ / OSX.1+</td>
-            <td class="center">1.2</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Mozilla 1.3</td>
-            <td>Win 95+ / OSX.1+</td>
-            <td class="center">1.3</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Mozilla 1.4</td>
-            <td>Win 95+ / OSX.1+</td>
-            <td class="center">1.4</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Mozilla 1.5</td>
-            <td>Win 95+ / OSX.1+</td>
-            <td class="center">1.5</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Mozilla 1.6</td>
-            <td>Win 95+ / OSX.1+</td>
-            <td class="center">1.6</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Mozilla 1.7</td>
-            <td>Win 98+ / OSX.1+</td>
-            <td class="center">1.7</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Mozilla 1.8</td>
-            <td>Win 98+ / OSX.1+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Seamonkey 1.1</td>
-            <td>Win 98+ / OSX.2+</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Gecko</td>
-            <td>Epiphany 2.20</td>
-            <td>Gnome</td>
-            <td class="center">1.8</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Webkit</td>
-            <td>Safari 1.2</td>
-            <td>OSX.3</td>
-            <td class="center">125.5</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Webkit</td>
-            <td>Safari 1.3</td>
-            <td>OSX.3</td>
-            <td class="center">312.8</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Webkit</td>
-            <td>Safari 2.0</td>
-            <td>OSX.4+</td>
-            <td class="center">419.3</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Webkit</td>
-            <td>Safari 3.0</td>
-            <td>OSX.4+</td>
-            <td class="center">522.1</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Webkit</td>
-            <td>OmniWeb 5.5</td>
-            <td>OSX.4+</td>
-            <td class="center">420</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Webkit</td>
-            <td>iPod Touch / iPhone</td>
-            <td>iPod</td>
-            <td class="center">420.1</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Webkit</td>
-            <td>S60</td>
-            <td>S60</td>
-            <td class="center">413</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Presto</td>
-            <td>Opera 7.0</td>
-            <td>Win 95+ / OSX.1+</td>
-            <td class="center">-</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Presto</td>
-            <td>Opera 7.5</td>
-            <td>Win 95+ / OSX.2+</td>
-            <td class="center">-</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Presto</td>
-            <td>Opera 8.0</td>
-            <td>Win 95+ / OSX.2+</td>
-            <td class="center">-</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Presto</td>
-            <td>Opera 8.5</td>
-            <td>Win 95+ / OSX.2+</td>
-            <td class="center">-</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Presto</td>
-            <td>Opera 9.0</td>
-            <td>Win 95+ / OSX.3+</td>
-            <td class="center">-</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Presto</td>
-            <td>Opera 9.2</td>
-            <td>Win 88+ / OSX.3+</td>
-            <td class="center">-</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Presto</td>
-            <td>Opera 9.5</td>
-            <td>Win 88+ / OSX.3+</td>
-            <td class="center">-</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Presto</td>
-            <td>Opera for Wii</td>
-            <td>Wii</td>
-            <td class="center">-</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Presto</td>
-            <td>Nokia N800</td>
-            <td>N800</td>
-            <td class="center">-</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Presto</td>
-            <td>Nintendo DS browser</td>
-            <td>Nintendo DS</td>
-            <td class="center">8.5</td>
-            <td class="center">C/A<sup>1</sup></td>
-          </tr>
-          <tr class="gradeC">
-            <td>KHTML</td>
-            <td>Konqureror 3.1</td>
-            <td>KDE 3.1</td>
-            <td class="center">3.1</td>
-            <td class="center">C</td>
-          </tr>
-          <tr class="gradeA">
-            <td>KHTML</td>
-            <td>Konqureror 3.3</td>
-            <td>KDE 3.3</td>
-            <td class="center">3.3</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeA">
-            <td>KHTML</td>
-            <td>Konqureror 3.5</td>
-            <td>KDE 3.5</td>
-            <td class="center">3.5</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeX">
-            <td>Tasman</td>
-            <td>Internet Explorer 4.5</td>
-            <td>Mac OS 8-9</td>
-            <td class="center">-</td>
-            <td class="center">X</td>
-          </tr>
-          <tr class="gradeC">
-            <td>Tasman</td>
-            <td>Internet Explorer 5.1</td>
-            <td>Mac OS 7.6-9</td>
-            <td class="center">1</td>
-            <td class="center">C</td>
-          </tr>
-          <tr class="gradeC">
-            <td>Tasman</td>
-            <td>Internet Explorer 5.2</td>
-            <td>Mac OS 8-X</td>
-            <td class="center">1</td>
-            <td class="center">C</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Misc</td>
-            <td>NetFront 3.1</td>
-            <td>Embedded devices</td>
-            <td class="center">-</td>
-            <td class="center">C</td>
-          </tr>
-          <tr class="gradeA">
-            <td>Misc</td>
-            <td>NetFront 3.4</td>
-            <td>Embedded devices</td>
-            <td class="center">-</td>
-            <td class="center">A</td>
-          </tr>
-          <tr class="gradeX">
-            <td>Misc</td>
-            <td>Dillo 0.8</td>
-            <td>Embedded devices</td>
-            <td class="center">-</td>
-            <td class="center">X</td>
-          </tr>
-          <tr class="gradeX">
-            <td>Misc</td>
-            <td>Links</td>
-            <td>Text only</td>
-            <td class="center">-</td>
-            <td class="center">X</td>
-          </tr>
-          <tr class="gradeX">
-            <td>Misc</td>
-            <td>Lynx</td>
-            <td>Text only</td>
-            <td class="center">-</td>
-            <td class="center">X</td>
-          </tr>
-          <tr class="gradeC">
-            <td>Misc</td>
-            <td>IE Mobile</td>
-            <td>Windows Mobile 6</td>
-            <td class="center">-</td>
-            <td class="center">C</td>
-          </tr>
-          <tr class="gradeC">
-            <td>Misc</td>
-            <td>PSP browser</td>
-            <td>PSP</td>
-            <td class="center">-</td>
-            <td class="center">C</td>
-          </tr>
-          <tr class="gradeU">
-            <td>Other browsers</td>
-            <td>All others</td>
-            <td>-</td>
-            <td class="center">-</td>
-            <td class="center">U</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th>Rendering engine</th>
-            <th>Browser</th>
-            <th>Platform(s)</th>
-            <th>Engine version</th>
-            <th>CSS grade</th>
-          </tr>
-        </tfoot>
-      </table>
-	</div>
-</body>
+				
+                if($page_number == $page_count) { ?>
+                	<li class="active"><a>Next</a></li>
+                <? } else { $next_page = $page_number + 1; ?>
+                	<li><a href=index.php?page=<? echo $next_page ?>>Next</a></li>
+                <? } ?>
+	            </ul>
+	        </div>
+        </div>
+    </body>
 </html>

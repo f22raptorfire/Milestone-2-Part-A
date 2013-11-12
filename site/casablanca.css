@@ -51,7 +51,7 @@ tbody a {
 	padding: 1px 2px;
 	color: #333;
 	text-decoration: none;
-	border-bottom: 1px dotted #E63C1E
+	//border-bottom: 1px dotted #E63C1E
 }
 
 tbody a:active,tbody a:hover,tbody a:focus,tbody a:visited {
@@ -64,7 +64,7 @@ tbody tr:hover {
 }
 
 tbody tr:hover a {
-	background-color: #FFF
+	//background-color: #FFF
 }
 
 tbody td+td+td+td a {

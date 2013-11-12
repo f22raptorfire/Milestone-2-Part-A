@@ -1,10 +1,10 @@
 <?php
-$connection = mysql_connect( 'localhost', '', '' ); //add username and password
+$connection = mysql_connect( 'localhost', 'sjsucsor_160g4', 'groupfourdb' );
 if (!$connection)
 {
  die('Could not connect: ' . mysql_error());
 }
-mysql_select_db( 'test2' );
+mysql_select_db( 'sjsucsor_160g4fall2013' );
 $query    = "SELECT * FROM coursedetails";
 $result   = mysql_query( $query );
 $col_name = array( );
@@ -19,6 +19,7 @@ for ( $i = 0; $i < mysql_num_fields( $result ); $i++ ) {
    <link rel="stylesheet" type="text/css" href="casablanca.css">
  </head>
  <body>
+   <a href="index_old.php">Home</a>
    <table>
      <thead>
        <tr>
